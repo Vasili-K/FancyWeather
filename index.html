@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="applicationContainer">
+        <div class="overlayPic">
+            <div class="controlBlok">
+
+                <div class="changeButtons">
+
+                    <button id="reload" class="reload btn" onClick="window.location.reload()">&#10050;</button>
+                    <div class="languages">
+                        <button id="EN" class="languageEN btn">EN</button>
+                    </div>
+                    <div class="degreeChange">
+                        <button id="C" class="btn">°C</button>
+                    </div>
+
+                </div>
+                <div class="searchLine">
+                    <input id="researchInput" type="text" class="researchInputText">
+                    <button id="reserchPress" class="btn">&#128269;</button>
+                </div>
+
+            </div>
+
+            <div class="informationBlock">
+
+                <div class="weatherInformation">
+                    <div class="weatherForToday">
+                        <div class="location">
+                            <h1 class="locationTimezone"></h1>
+                            <p></p>
+                            <div class="dateTime">
+                                <h2 class="currentDate"></h2>
+                                <time id="time"></time>
+                            </div>
+
+                        </div>
+
+                        <div class="temperature">
+                            <div class="degreeSection">
+                                <h2 class="temperatureDegree"></h2>
+                            </div>
+
+                            <div class="additionInfo">
+                                <div class="description dayinfo"></div>
+                                <div class="temperatureFeels dayinfo"></div>
+                                <div class="humidity dayinfo"></div>
+                                <div class="windSpeed dayinfo"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="weatherForecast">
+                        <div class="days">
+                            <h2 class="dayOne"></h2>
+                            <p class="dayOneIcon dayIcons"></p>
+                            <p class="dayOnedescription"></p>
+                            <p class="dayOneDegree"></p>
+                        </div>
+                        <div class="days">
+                            <h2 class="dayTwo"></h2>
+                            <p class="dayTwoIcon dayIcons"></p>
+                            <p class="dayTwodescription"></p>
+                            <p class="dayTwoDegree"></p>
+                        </div>
+                        <div class="days">
+                            <h2 class="dayThree"></h2>
+                            <p class="dayThreeIcon dayIcons"></p>
+                            <p class="dayThreedescription"></p>
+                            <p class="dayThreeDegree"></p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="geolocationData">
+                    <div class="mapAndCoordinates">
+                        <div id="map" class="mapStyle"></div>
+                        <div class="mapLat"></div>
+                        <div class="mapLong"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <script src="weather.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript">
+    </script>
+
+</body>
+
+</html>

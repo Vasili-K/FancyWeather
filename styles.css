@@ -1,0 +1,309 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(rgb(47, 150, 163), rgb(48, 62, 143));
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: white;
+}
+
+.applicationContainer {
+  height: 100vh;
+  width: 100vw;
+  min-width: 320px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  background-size: 100% 100vh;
+}
+
+.overlayPic {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.controlBlok {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.changeButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 35%;
+  font-size: 20px;
+  margin-top: 20px;
+}
+#reload {
+  font-size: 20px;
+}
+.searchLine {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 45%;
+  font-size: 20px;
+  margin-top: 20px;
+}
+.searchLine input {
+  width: 80%;
+}
+.btn {
+  cursor: pointer;
+  text-align: center;
+  height: 30px;
+  width: 80px;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+.degreeChange {
+  width: 80px;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border-radius: 5px;
+}
+.researchInputText {
+  height: 30px;
+  border-radius: 5px;
+}
+
+.informationBlock {
+  width: 100%;
+  height: 85%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.weatherInformation {
+  width: 55%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.geolocationData {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 45%;
+  height: 100%;
+}
+
+.weatherForToday {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.weatherForecast {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 20%;
+}
+.weatherForecast h2 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+}
+.weatherForecast p {
+  font-size: 14px;
+}
+.dayIcons img {
+  width: 50px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+}
+.location {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.location,
+.temperature {
+  height: 30vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.location img {
+  width: 142px;
+  height: 126px;
+  color: white;
+  z-index: 5;
+}
+.temperature {
+  flex-direction: row;
+}
+
+.degreeSection {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.degreeSection span {
+  margin: 10px;
+  font-size: 60px;
+}
+
+.degreeSection h2 {
+  font-size: 80px;
+}
+
+.dayinfo {
+  margin-top: 3px;
+}
+
+.days {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  width: 30%;
+  height: 95%;
+  border: 2px solid white;
+  border-radius: 8px;
+  margin-top: 2px;
+}
+
+.mapAndCoordinates {
+  height: 60%;
+  width: 80%;
+}
+.mapStyle {
+  width: 100%;
+  height: 90%;
+  border: 2px solid white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+@media (max-width: 760px) {
+  .btn {
+    height: 30px;
+    width: 40px;
+  }
+  .degreeChange {
+    width: 40px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 700px) {
+  .controlBlok {
+    justify-content: space-evenly;
+  }
+  .changeButtons {
+    width: 35%;
+  }
+  .informationBlock {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .weatherInformation {
+    width: 100%;
+    height: 60%;
+  }
+
+  .geolocationData {
+    width: 100%;
+    height: 40%;
+  }
+  .weatherForToday {
+    height: 70%;
+    flex-direction: row;
+  }
+  .weatherForecast {
+    height: 30%;
+  }
+  .mapAndCoordinates {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 90%;
+    width: 80%;
+    justify-content: space-between;
+  }
+  .location,
+  .temperature {
+    height: 50%;
+    width: 100%;
+  }
+  .location {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .location img {
+    width: 90px;
+    height: 70px;
+  }
+  .location h1 {
+    font-size: 20px;
+  }
+  .dateTime h2 {
+    font-size: 16px;
+  }
+  .temperature h2 {
+    font-size: 60px;
+  }
+}
+@media (max-width: 500px) {
+  .controlBlok {
+    flex-direction: column;
+  }
+  .changeButtons {
+    width: 100%;
+  }
+  .searchLine {
+    justify-content: space-around;
+    width: 100%;
+  }
+  .temperature h2 {
+    font-size: 40px;
+  }
+}
+@media (max-width: 370px) {
+  .additionInfo {
+    font-size: 14px;
+  }
+  .mapLat,
+  .mapLong {
+    font-size: 12px;
+  }
+  .weatherForecast h2 {
+    font-size: 12px;
+  }
+}
