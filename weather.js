@@ -24,6 +24,7 @@ window.addEventListener("load", () => {
     "Пятница",
     "Суббота",
   ];
+  const monthsInNumbers = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
   const descriptionEng = ["Feels Like: ", "Humidity: ", "Wind speed: "];
   const descriptionRu = ["Ощущается как: ", "Влажность: ", "Скорость ветра: "];
   const coordinatesEng = ["Latitude: ", "Longitude: "];
@@ -109,7 +110,6 @@ window.addEventListener("load", () => {
           //Set DOM elements from the API for main screen
           const { temp, app_max_temp, rh } = dataForToday.data[0];
           let iconID = dataForToday.data[0].weather.icon;
-          let plaseName = dataForToday.city_name;
 
           weatherIcon.innerHTML = `<img src = 'https://www.weatherbit.io/static/img/icons/${iconID}.png'></img>`;
           currentDate.textContent =
@@ -117,7 +117,7 @@ window.addEventListener("load", () => {
             " " +
             tudayDate.getDate() +
             "/" +
-            tudayDate.getMonth() +
+            monthsInNumbers[tudayDate.getMonth()]  +
             "/" +
             tudayDate.getFullYear();
           temperatureDegree.textContent = temp + сelsius;
@@ -180,8 +180,8 @@ window.addEventListener("load", () => {
             .toFixed(2)
             .toString()
             .replace(".", "°");
-          mapLat.textContent = coordinatesEng[0] + latitudeValue + '"';
-          mapLong.textContent = coordinatesEng[1] + LongitudeValue + '"';
+          mapLat.textContent = coordinatesEng[0] + latitudeValue + "'";
+          mapLong.textContent = coordinatesEng[1] + LongitudeValue + "'";
 
           //Change degree from celsius to fahrenheit
           degreeChange.addEventListener("click", () => {
@@ -238,7 +238,7 @@ window.addEventListener("load", () => {
                     " " +
                     tudayDate.getDate() +
                     "/" +
-                    tudayDate.getMonth() +
+                    monthsInNumbers[tudayDate.getMonth()] +
                     "/" +
                     tudayDate.getFullYear();
                   dayOne.textContent =
@@ -254,9 +254,9 @@ window.addEventListener("load", () => {
                     " " +
                     forecastDayThreeDate.getDate();
 
-                  mapLat.textContent = coordinatesEng[0] + latitudeValue + '"';
+                  mapLat.textContent = coordinatesEng[0] + latitudeValue + "'";
                   mapLong.textContent =
-                    coordinatesEng[1] + LongitudeValue + '"';
+                    coordinatesEng[1] + LongitudeValue + "'";
                 });
             }
           });
@@ -344,8 +344,8 @@ window.addEventListener("load", () => {
           .toFixed(2)
           .toString()
           .replace(".", "°");
-        mapLat.textContent = coordinatesEng[0] + latitudeValue + '"';
-        mapLong.textContent = coordinatesEng[1] + LongitudeValue + '"';
+        mapLat.textContent = coordinatesEng[0] + latitudeValue + "'";
+        mapLong.textContent = coordinatesEng[1] + LongitudeValue + "'";
 
         description.textContent = dataForToday.data[0].weather.description;
         temperatureFeelsLike.textContent =
@@ -365,7 +365,7 @@ window.addEventListener("load", () => {
           " " +
           tudayDate.getDate() +
           "/" +
-          tudayDate.getMonth() +
+          monthsInNumbers[tudayDate.getMonth()] +
           "/" +
           tudayDate.getFullYear();
         dayOne.textContent =
@@ -381,8 +381,8 @@ window.addEventListener("load", () => {
           " " +
           forecastDayThreeDate.getDate();
 
-        mapLat.textContent = coordinatesRu[0] + latitudeValue + '"';
-        mapLong.textContent = coordinatesRu[1] + LongitudeValue + '"';
+        mapLat.textContent = coordinatesRu[0] + latitudeValue + "'";
+        mapLong.textContent = coordinatesRu[1] + LongitudeValue + "'";
       });
   }
 
