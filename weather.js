@@ -24,7 +24,6 @@ window.addEventListener("load", () => {
     "Пятница",
     "Суббота",
   ];
-  const monthsInNumbers = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
   const descriptionEng = ["Feels Like: ", "Humidity: ", "Wind speed: "];
   const descriptionRu = ["Ощущается как: ", "Влажность: ", "Скорость ветра: "];
   const coordinatesEng = ["Latitude: ", "Longitude: "];
@@ -82,6 +81,19 @@ window.addEventListener("load", () => {
   let tudayDate = new Date();
   let zoneOfTime;
 
+  function getCoordinates(arg) {
+    let arr = arg.split('.');
+    let hours = arr[0];
+    let minutes = Math.round((arr[1]/100)*60);
+    let coordinateValue = hours + "°" + minutes + "'";
+    
+  return coordinateValue
+  }
+  function setForenheit(arg) {
+    let degreeFar =  Math.round(arg * 1.8 + 32) + " " + fahrenheit;
+      return degreeFar;
+  };
+
   //Chek navigator and fill in DOM elements with text
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((positon) => {
@@ -106,19 +118,17 @@ window.addEventListener("load", () => {
           long = dataForToday.lon;
           lat = dataForToday.lat;
           zoneOfTime = dataForToday.timezone;
-          console.log(zoneOfTime);
+
           //Set DOM elements from the API for main screen
           const { temp, app_max_temp, rh } = dataForToday.data[0];
           let iconID = dataForToday.data[0].weather.icon;
 
           weatherIcon.innerHTML = `<img src = 'https://www.weatherbit.io/static/img/icons/${iconID}.png'></img>`;
-          currentDate.textContent =
-            dayEng[tudayDate.getDay()] +
+
+          currentDate.textContent = dayEng[tudayDate.getDay()] + " " + tudayDate.getDate() +
             " " +
-            tudayDate.getDate() +
-            "/" +
-            monthsInNumbers[tudayDate.getMonth()]  +
-            "/" +
+            tudayDate.toLocaleString('en', { month: 'long' }) +
+            " " +
             tudayDate.getFullYear();
           temperatureDegree.textContent = temp + сelsius;
           description.textContent = dataForToday.data[0].weather.description;
@@ -172,16 +182,11 @@ window.addEventListener("load", () => {
             forecastDayThreeDate.getDate();
 
           //Latitude and longitude values under the map
-          let latitudeValue = (+dataForToday.lat)
-            .toFixed(2)
-            .toString()
-            .replace(".", "°");
-          let LongitudeValue = (+dataForToday.lon)
-            .toFixed(2)
-            .toString()
-            .replace(".", "°");
-          mapLat.textContent = coordinatesEng[0] + latitudeValue + "'";
-          mapLong.textContent = coordinatesEng[1] + LongitudeValue + "'";
+          let latValue = (dataForToday.lat).toString();
+          let lonValue = (dataForToday.lon).toString();
+
+          mapLat.textContent = coordinatesEng[0] + getCoordinates(latValue);
+          mapLong.textContent = coordinatesEng[1] + getCoordinates(lonValue);
 
           //Change degree from celsius to fahrenheit
           degreeChange.addEventListener("click", () => {
@@ -237,9 +242,10 @@ window.addEventListener("load", () => {
                     dayEng[tudayDate.getDay()] +
                     " " +
                     tudayDate.getDate() +
-                    "/" +
-                    monthsInNumbers[tudayDate.getMonth()] +
-                    "/" +
+                    " " +
+                   tudayDate.toLocaleString('en', { month: 'long' }) +
+                    " " +
+                    " " +
                     tudayDate.getFullYear();
                   dayOne.textContent =
                     dayEnglish[forecastDayOneDate.getDay()] +
@@ -254,9 +260,8 @@ window.addEventListener("load", () => {
                     " " +
                     forecastDayThreeDate.getDate();
 
-                  mapLat.textContent = coordinatesEng[0] + latitudeValue + "'";
-                  mapLong.textContent =
-                    coordinatesEng[1] + LongitudeValue + "'";
+                  mapLat.textContent = coordinatesEng[0] + getCoordinates(latValue);
+                  mapLong.textContent = coordinatesEng[1] + getCoordinates(lonValue);;
                 });
             }
           });
@@ -292,7 +297,6 @@ window.addEventListener("load", () => {
             center: [lat, long],
             zoom: 10,
           });
-          console.log(lat);
         })
       .catch((error) => {
         alert("Enter right city name");
@@ -336,16 +340,10 @@ window.addEventListener("load", () => {
         let forecastDayThreeDate = new Date(
           Date.parse(dataForToday.data[3].valid_date)
         );
-        let latitudeValue = (+dataForToday.lat)
-          .toFixed(2)
-          .toString()
-          .replace(".", "°");
-        let LongitudeValue = (+dataForToday.lon)
-          .toFixed(2)
-          .toString()
-          .replace(".", "°");
-        mapLat.textContent = coordinatesEng[0] + latitudeValue + "'";
-        mapLong.textContent = coordinatesEng[1] + LongitudeValue + "'";
+        let latValue = (dataForToday.lat).toString();
+        let lonValue = (dataForToday.lon).toString();
+        mapLat.textContent = coordinatesEng[0] + getCoordinates(latValue);
+        mapLong.textContent = coordinatesEng[1] + getCoordinates(lonValue);
 
         description.textContent = dataForToday.data[0].weather.description;
         temperatureFeelsLike.textContent =
@@ -360,13 +358,13 @@ window.addEventListener("load", () => {
           countriesRU[dataForToday.country_code];
         languageButton.textContent = "RU";
         localStorage.setItem("Language", "RU");
+
         currentDate.textContent =
           dayRus[tudayDate.getDay()] +
+          " " + tudayDate.getDate() +
           " " +
-          tudayDate.getDate() +
-          "/" +
-          monthsInNumbers[tudayDate.getMonth()] +
-          "/" +
+          tudayDate.toLocaleString('ru', { month: 'long' }) +
+          " " +
           tudayDate.getFullYear();
         dayOne.textContent =
           dayRussian[forecastDayOneDate.getDay()] +
@@ -381,8 +379,8 @@ window.addEventListener("load", () => {
           " " +
           forecastDayThreeDate.getDate();
 
-        mapLat.textContent = coordinatesRu[0] + latitudeValue + "'";
-        mapLong.textContent = coordinatesRu[1] + LongitudeValue + "'";
+        mapLat.textContent = coordinatesRu[0] + getCoordinates(latValue);;
+        mapLong.textContent = coordinatesRu[1] + getCoordinates(lonValue);;
       });
   }
 
@@ -399,19 +397,12 @@ window.addEventListener("load", () => {
 
         degreeButton.textContent = fahrenheit;
         localStorage.setItem("Degree", fahrenheit);
-        temperatureDegree.textContent =
-          Math.round(temp * 1.8 + 32) + fahrenheit;
-        temperatureFeelsLike.textContent =
-          "Feels Like: " +
-          Math.round(app_max_temp * 1.8 + 32) +
-          " " +
-          fahrenheit;
-        dayOneDegree.textContent =
-          Math.round(dataForToday.data[1].temp * 1.8 + 32) + fahrenheit;
-        dayTwoDegree.textContent =
-          Math.round(dataForToday.data[2].temp * 1.8 + 32) + fahrenheit;
-        dayThreeDegree.textContent =
-          Math.round(dataForToday.data[3].temp * 1.8 + 32) + fahrenheit;
+        temperatureDegree.textContent = setForenheit(temp);
+        temperatureFeelsLike.textContent = 
+          "Feels Like: " + setForenheit(app_max_temp);
+        dayOneDegree.textContent = setForenheit(dataForToday.data[1].temp);
+        dayTwoDegree.textContent = setForenheit(dataForToday.data[2].temp);
+        dayThreeDegree.textContent = setForenheit(dataForToday.data[2].temp);
       });
   }
 });
