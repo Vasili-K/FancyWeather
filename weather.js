@@ -82,7 +82,7 @@ window.addEventListener("load", () => {
   let zoneOfTime;
 
   function getCoordinates(arg) {
-    let arr = arg.split('.');
+    let arr = (+arg).toFixed(2).toString().split('.');
     let hours = arr[0];
     let minutes = Math.round((arr[1]/100)*60);
     let coordinateValue = hours + "°" + minutes + "'";
@@ -183,7 +183,7 @@ window.addEventListener("load", () => {
 
           //Latitude and longitude values under the map
           let latValue = (dataForToday.lat).toString();
-          let lonValue = (dataForToday.lon).toString();
+          let lonValue = (+dataForToday.lon).toString();
 
           mapLat.textContent = coordinatesEng[0] + getCoordinates(latValue);
           mapLong.textContent = coordinatesEng[1] + getCoordinates(lonValue);
@@ -298,9 +298,9 @@ window.addEventListener("load", () => {
             zoom: 10,
           });
         })
-      .catch((error) => {
-        alert("Enter right city name");
-      });
+      // .catch((error) => {
+      //   alert("Enter right city name");
+      // });
     });
   }
 
@@ -330,7 +330,6 @@ window.addEventListener("load", () => {
       })
       .then((dataForToday) => {
         const { app_max_temp, rh } = dataForToday.data[0];
-        let plaseName = dataForToday.city_name;
         let forecastDayOneDate = new Date(
           Date.parse(dataForToday.data[1].valid_date)
         );
