@@ -49,6 +49,11 @@ body {
   font-size: 20px;
   margin-top: 20px;
 }
+.languages {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
 #reload {
   font-size: 20px;
 }

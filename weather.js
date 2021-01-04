@@ -72,8 +72,9 @@ window.addEventListener("load", () => {
   const degreeChange = document.querySelector(".degreeChange");
   const degreeButton = document.querySelector(".degreeChange button");
 
-  const languageChange = document.querySelector(".languages");
-  const languageButton = document.querySelector(".languages button");
+  //const languageChange = document.querySelector(".languages");
+  const languageButtonEN = document.querySelector("#EN");
+  const languageButtonRU = document.querySelector("#RU");
 
   //Additional variables
   let apiToday;
@@ -211,10 +212,14 @@ window.addEventListener("load", () => {
             changeDegreeF();
           }
           //Change languages
-          languageChange.addEventListener("click", () => {
-            if (languageButton.textContent === "EN") {
+          languageButtonRU.addEventListener("click", () => {
+            if (languageButtonRU.textContent === "RU") {
               changeLangugeRU(apiToday);
-            } else {
+            } 
+          });
+          languageButtonEN.addEventListener("click", () => {
+            if(languageButtonEN.textContent === "EN"){
+              
               const apiTodayEN = `${apiToday}&lang=en`;
 
               fetch(apiTodayEN)
@@ -231,12 +236,10 @@ window.addEventListener("load", () => {
                     descriptionEng[2] +
                     Math.round(dataForToday.data[0].wind_spd) +
                     " m/s";
-
                   locationTimezone.textContent =
                     dataForToday.city_name +
                     "  /  " +
                     countriesEng[dataForToday.country_code];
-                  languageButton.textContent = "EN";
                   localStorage.setItem("Language", "EN");
                   currentDate.textContent =
                     dayEng[tudayDate.getDay()] +
@@ -264,7 +267,7 @@ window.addEventListener("load", () => {
                   mapLong.textContent = coordinatesEng[1] + getCoordinates(lonValue);;
                 });
             }
-          });
+          })
           //Function for time with changing seconds
           function showTime() {
             let today = new Date(
@@ -320,7 +323,7 @@ window.addEventListener("load", () => {
       applicationContainer.style.backgroundImage = backImg;
     });
 
-  //Function for save customer settings for languages
+  //Function for set Russin language
   function changeLangugeRU(apiToday) {
     const apiTodayRU = `${apiToday}&lang=ru`;
 
@@ -355,7 +358,6 @@ window.addEventListener("load", () => {
           dataForToday.city_name +
           "  /  " +
           countriesRU[dataForToday.country_code];
-        languageButton.textContent = "RU";
         localStorage.setItem("Language", "RU");
 
         currentDate.textContent =
@@ -382,6 +384,8 @@ window.addEventListener("load", () => {
         mapLong.textContent = coordinatesRu[1] + getCoordinates(lonValue);;
       });
   }
+
+   //Function for set English language
 
   //Function for save customer settings for degree
   function changeDegreeF() {
