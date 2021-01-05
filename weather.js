@@ -2,7 +2,12 @@ const searchButton = document.querySelector("#reserchPress");
 const searchInput = document.querySelector("#researchInput");
 const reloadButton = document.querySelector("#reload");
 
+let forecastDayOneDate;
+let forecastDayTwoDate;
+let forecastDayThreeDate;
+
 window.addEventListener("load", () => {
+  
   //Massives and variables for translation and transformation
   const dayEng = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const dayEnglish = [
@@ -72,7 +77,6 @@ window.addEventListener("load", () => {
   const degreeChange = document.querySelector(".degreeChange");
   const degreeButton = document.querySelector(".degreeChange button");
 
-  //const languageChange = document.querySelector(".languages");
   const languageButtonEN = document.querySelector("#EN");
   const languageButtonRU = document.querySelector("#RU");
 
@@ -94,6 +98,13 @@ window.addEventListener("load", () => {
     let degreeFar =  Math.round(arg * 1.8 + 32) + " " + fahrenheit;
       return degreeFar;
   };
+
+  function setForecastData(argument) {
+    let dayOneDate = new Date(
+      Date.parse(argument)
+     );
+     return dayOneDate;
+   }
 
   //Chek navigator and fill in DOM elements with text
   if (navigator.geolocation) {
@@ -146,16 +157,13 @@ window.addEventListener("load", () => {
             countriesEng[dataForToday.country_code];
 
           //Set DOM elements from the API for forecast
+          let dayOneValue = dataForToday.data[1].valid_date;
+          let dayTwoValue = dataForToday.data[2].valid_date;
+          let dayThreeValue = dataForToday.data[3].valid_date;
 
-          let forecastDayOneDate = new Date(
-            Date.parse(dataForToday.data[1].valid_date)
-          );
-          let forecastDayTwoDate = new Date(
-            Date.parse(dataForToday.data[2].valid_date)
-          );
-          let forecastDayThreeDate = new Date(
-            Date.parse(dataForToday.data[3].valid_date)
-          );
+          forecastDayOneDate = setForecastData(dayOneValue);
+          forecastDayTwoDate = setForecastData(dayTwoValue);
+          forecastDayThreeDate = setForecastData(dayThreeValue);
 
           let iconIDOne = dataForToday.data[1].weather.icon;
           let iconIDTwo = dataForToday.data[2].weather.icon;
@@ -184,7 +192,7 @@ window.addEventListener("load", () => {
 
           //Latitude and longitude values under the map
           let latValue = (dataForToday.lat).toString();
-          let lonValue = (+dataForToday.lon).toString();
+          let lonValue = (dataForToday.lon).toString();
 
           mapLat.textContent = coordinatesEng[0] + getCoordinates(latValue);
           mapLong.textContent = coordinatesEng[1] + getCoordinates(lonValue);
@@ -301,9 +309,9 @@ window.addEventListener("load", () => {
             zoom: 10,
           });
         })
-      // .catch((error) => {
-      //   alert("Enter right city name");
-      // });
+      .catch((error) => {
+        alert("Enter right city name");
+      });
     });
   }
 
@@ -333,15 +341,7 @@ window.addEventListener("load", () => {
       })
       .then((dataForToday) => {
         const { app_max_temp, rh } = dataForToday.data[0];
-        let forecastDayOneDate = new Date(
-          Date.parse(dataForToday.data[1].valid_date)
-        );
-        let forecastDayTwoDate = new Date(
-          Date.parse(dataForToday.data[2].valid_date)
-        );
-        let forecastDayThreeDate = new Date(
-          Date.parse(dataForToday.data[3].valid_date)
-        );
+
         let latValue = (dataForToday.lat).toString();
         let lonValue = (dataForToday.lon).toString();
         mapLat.textContent = coordinatesEng[0] + getCoordinates(latValue);
@@ -384,8 +384,6 @@ window.addEventListener("load", () => {
         mapLong.textContent = coordinatesRu[1] + getCoordinates(lonValue);;
       });
   }
-
-   //Function for set English language
 
   //Function for save customer settings for degree
   function changeDegreeF() {
